@@ -130,6 +130,13 @@ Page {
                     PropertyAnimation {
                         duration:250
                         easing.type:Easing.OutCirc
+                        onRunningChanged: {
+                            // end of slide-open animation
+                            if(!running && advancedOptions.height > 0) {
+                                // remove fixed height, ComboBoxes require auto sizing
+                                advancedOptions.height = undefined
+                            }
+                        }
                     }
                 }
             }
