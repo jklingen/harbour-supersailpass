@@ -83,14 +83,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MD5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SHA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Generate</source>
         <translation type="unfinished"></translation>
     </message>

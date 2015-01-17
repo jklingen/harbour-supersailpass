@@ -1,23 +1,4 @@
-// fake window object and setTimeout function to make browserified SGP work without browser
-var window = window || {};
-function setTimeout(fn,ms) {
-    fn();
-}
-
-/**
-  * truncates a float to an int, similar to a bitwise floatNum | 0
-  * SGP makes heavy use of this construct for float to int conversion
-  * needed to replace this to work around arithmetic glitch in Qt5.2 JS engine, see https://bugreports.qt.io/browse/QTBUG-43852
-  */
-function truncateToInt(floatNum) {
-    //return floatNum | 0
-    if(!floatNum) return 0;
-    return (floatNum > 0) ? Math.floor(floatNum) : Math.ceil(floatNum);
-}
-/*
- * browserified version of supergenpass-lib below
- * changed bitwise operation for float to int truncation (e.g. n|0) to truncateToInt implementation
- */
+// browserified version of supergenpass-lib
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.supergenpass=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process){
 /*!
@@ -620,7 +601,7 @@ process.chdir = function (dir) {
                     var _r = r((rcache || Math.random()) * 0x100000000);
 
                     rcache = _r() * 0x3ade67b7;
-                    words.push(truncateToInt(_r() * 0x100000000));
+                    words.push((_r() * 0x100000000) | 0);
                 }
 
                 return new WordArray.init(words, nBytes);
@@ -866,7 +847,7 @@ process.chdir = function (dir) {
                 } else {
                     // Round down to include only full blocks,
                     // less the number of blocks that must remain in the buffer
-                    nBlocksReady = Math.max(truncateToInt(nBlocksReady) - this._minBufferSize, 0);
+                    nBlocksReady = Math.max((nBlocksReady | 0) - this._minBufferSize, 0);
                 }
 
                 // Count words ready
@@ -1209,7 +1190,7 @@ process.chdir = function (dir) {
         // Compute constants
         (function () {
             for (var i = 0; i < 64; i++) {
-                T[i] = truncateToInt(Math.abs(Math.sin(i + 1)) * 0x100000000);
+                T[i] = (Math.abs(Math.sin(i + 1)) * 0x100000000) | 0;
             }
         }());
 
@@ -1225,6 +1206,7 @@ process.chdir = function (dir) {
             },
 
             _doProcessBlock: function (M, offset) {
+
                 // Swap endian
                 for (var i = 0; i < 16; i++) {
                     // Shortcuts
@@ -1262,6 +1244,7 @@ process.chdir = function (dir) {
                 var b = H[1];
                 var c = H[2];
                 var d = H[3];
+
 
                 // Computation
                 a = FF(a, b, c, d, M_offset_0,  7,  T[0]);
@@ -1333,10 +1316,11 @@ process.chdir = function (dir) {
                 b = II(b, c, d, a, M_offset_9,  21, T[63]);
 
                 // Intermediate hash value
-                H[0] = truncateToInt(H[0] + a);
-                H[1] = truncateToInt(H[1] + b);
-                H[2] = truncateToInt(H[2] + c);
-                H[3] = truncateToInt(H[3] + d);
+                H[0] = (H[0] + a) | 0;
+                H[1] = (H[1] + b) | 0;
+                H[2] = (H[2] + c) | 0;
+                H[3] = (H[3] + d) | 0;
+
             },
 
             _doFinalize: function () {
@@ -1598,8 +1582,8 @@ process.chdir = function (dir) {
 
                     // Extend message
                     if (i < 16) {
-                        var Wih = Wi.high = truncateToInt(M[offset + i * 2]);
-                        var Wil = Wi.low  = truncateToInt(M[offset + i * 2 + 1]);
+                        var Wih = Wi.high = M[offset + i * 2]     | 0;
+                        var Wil = Wi.low  = M[offset + i * 2 + 1] | 0;
                     } else {
                         // Gamma0
                         var gamma0x  = W[i - 15];
@@ -1670,16 +1654,16 @@ process.chdir = function (dir) {
                     gl = fl;
                     fh = eh;
                     fl = el;
-                    el = truncateToInt(dl + t1l);
-                    eh = truncateToInt(dh + t1h + ((el >>> 0) < (dl >>> 0) ? 1 : 0));
+                    el = (dl + t1l) | 0;
+                    eh = (dh + t1h + ((el >>> 0) < (dl >>> 0) ? 1 : 0)) | 0;
                     dh = ch;
                     dl = cl;
                     ch = bh;
                     cl = bl;
                     bh = ah;
                     bl = al;
-                    al = truncateToInt(t1l + t2l);
-                    ah = truncateToInt(t1h + t2h + ((al >>> 0) < (t1l >>> 0) ? 1 : 0));
+                    al = (t1l + t2l) | 0;
+                    ah = (t1h + t2h + ((al >>> 0) < (t1l >>> 0) ? 1 : 0)) | 0;
                 }
 
                 // Intermediate hash value
@@ -1977,9 +1961,9 @@ process.chdir = function (dir) {
              *     var added = x64Word.add(anotherX64Word);
              */
             // add: function (word) {
-                // var low = truncateToInt(this.low + word.low);
+                // var low = (this.low + word.low) | 0;
                 // var carry = (low >>> 0) < (this.low >>> 0) ? 1 : 0;
-                // var high = truncateToInt(this.high + word.high + carry);
+                // var high = (this.high + word.high + carry) | 0;
 
                 // return X64Word.create(high, low);
             // }

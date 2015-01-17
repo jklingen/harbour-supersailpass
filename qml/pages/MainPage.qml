@@ -120,8 +120,8 @@ Page {
                     label: qsTr ("Hash method")
                     currentIndex: 0
                     menu: ContextMenu {
-                        MenuItem {text:qsTr('MD5')}
-                        MenuItem {text:qsTr('SHA')}
+                        MenuItem { text:'MD5' }
+                        MenuItem { text:'SHA' }
                     }
 
                 }
@@ -150,7 +150,7 @@ Page {
                     var opts = {
                         secret: secretPasswordField.text,
                         length: parseInt(lengthCombo.value),
-                        method: hashMethodCombo.value.toLowerCase(),
+                        method: (hashMethodCombo.value === 'SHA') ? 'sha512' : 'md5',
                         removeSubdomains: subdomainRemovalSwitch.checked
                     };
                     SGP.window.supergenpass(masterPasswordField.text, domainField.text, opts, mainPage.onPasswordGenerated)
