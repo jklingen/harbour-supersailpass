@@ -66,7 +66,7 @@ Page {
                 width:parent.width
                 placeholderText: qsTr("Master password")
                 color: errorHighlight ? "red" : Theme.primaryColor
-                inputMethodHints: Qt.ImhNoPredictiveText
+                inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
                 echoMode: TextInput.Password
             }
 
@@ -75,7 +75,7 @@ Page {
                 width:parent.width
                 placeholderText: qsTr("Domain / URL")
                 color: errorHighlight ? "red" : Theme.primaryColor
-                inputMethodHints: Qt.ImhUrlCharactersOnly
+                inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase
             }
 
             Column {
@@ -96,7 +96,7 @@ Page {
                     width:parent.width
                     placeholderText: qsTr("Secret password")
                     color: errorHighlight ? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhNoPredictiveText
+                    inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
                     echoMode: TextInput.Password
                 }
 
