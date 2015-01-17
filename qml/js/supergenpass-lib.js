@@ -10,7 +10,6 @@ function setTimeout(fn,ms) {
   * needed to replace this to work around arithmetic glitch in Qt5.2 JS engine, see https://bugreports.qt.io/browse/QTBUG-43852
   */
 function truncateToInt(floatNum) {
-    //return floatNum | 0
     if(!floatNum) return 0;
     return (floatNum > 0) ? Math.floor(floatNum) : Math.ceil(floatNum);
 }
