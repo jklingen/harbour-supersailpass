@@ -100,19 +100,15 @@ Page {
                     echoMode: TextInput.Password
                 }
 
-                ComboBox {
-                    id: lengthCombo
+                Slider {
+                    id: lengthSlider
                     label: qsTr ("Password length")
-                    currentIndex: 2
-                    menu: ContextMenu {
-                        MenuItem {text: '6'}
-                        MenuItem {text: '8'}
-                        MenuItem {text: '10'}
-                        MenuItem {text: '12'}
-                        MenuItem {text: '14'}
-                        MenuItem {text: '16'}
-                    }
-
+                    width: parent.width
+                    minimumValue: 4
+                    maximumValue: 24
+                    value: 10
+                    stepSize: 1
+                    valueText: parseInt(value)
                 }
 
                 ComboBox {
@@ -149,7 +145,7 @@ Page {
                 onClicked: {
                     var opts = {
                         secret: secretPasswordField.text,
-                        length: parseInt(lengthCombo.value),
+                        length: parseInt(lengthSlider.value),
                         method: (hashMethodCombo.value === 'SHA') ? 'sha512' : 'md5',
                         removeSubdomains: subdomainRemovalSwitch.checked
                     };
