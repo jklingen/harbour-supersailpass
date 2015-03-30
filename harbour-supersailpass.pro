@@ -29,7 +29,8 @@ OTHER_FILES += qml/harbour-supersailpass.qml \
     qml/pages/CoverPage.qml \
     qml/js/supergenpass-lib.js \
     qml/pages/InfoPage.qml \
-    qml/pages/MainPage.qml
+    qml/pages/MainPage.qml \
+    qml/components/Spacer.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

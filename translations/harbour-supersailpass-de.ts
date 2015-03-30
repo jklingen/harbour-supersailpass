@@ -26,23 +26,11 @@
 <context>
     <name>InfoPage</name>
     <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Version %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A SuperGenPass implementation for SailfishOS.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Questions, problems, suggestions?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Free &amp; open source!</source>
+        <source>Copyright © %2&lt;br&gt;Jens Klingen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -51,14 +39,6 @@
     </message>
     <message>
         <source>%1 has been invented and is maintained by %2. Thanks!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SuperGenPass transforms a master password into domain-specific and unique passwords.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copyright © %2 Jens Klingen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
