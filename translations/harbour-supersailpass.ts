@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
 <context>
     <name>InfoPage</name>
     <message>
@@ -9,10 +9,6 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copyright �� %2 Jens Klingen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -37,6 +33,10 @@
     </message>
     <message>
         <source>SuperGenPass transforms a master password into domain-specific and unique passwords.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright © %2 Jens Klingen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
